@@ -1,0 +1,80 @@
+
+
+// Fields
+$font: 'Poppins', sans-serif;
+$trans: cubic-bezier(.7,0,.3,1);
+$prim: #FFFFFF;
+$seco: #191919;
+$tert: #2140AA;
+
+// Body
+body {
+
+  position: absolute;
+  overflow: hidden;
+  font-family: $font;
+  background-color: $prim;
+  color: $seco;
+  margin: 0;
+
+  *{ box-sizing: border-box; }
+
+  #instance {
+
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    cursor: none;
+
+    &:active #cursor .secondary {
+
+      width: 48px;
+      height: 48px;
+
+    }
+
+  }
+
+}
+
+
+// Cursor
+#cursor {
+
+  position: absolute;
+  pointer-events: none;
+
+  .secondary,
+  .primary {
+
+    position: fixed;
+    transform: translate(-50%,-50%);
+    border-radius: 50%;
+    z-index: 9;
+
+  }
+
+  .secondary {
+
+    width: 64px;
+    height: 64px;
+    
+    // background-color: rgba($tert, .2);
+    border: 1px solid $tert;
+
+    transition: 
+      width 80ms $trans,
+      height 80ms $trans;
+
+  }
+
+  .primary {
+
+    width: 8px;
+    height: 8px;
+    background-color: $tert;
+
+  }
+
+}

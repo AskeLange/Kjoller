@@ -1,0 +1,151 @@
+
+
+// Animations
+// From left
+@keyframes fromLeft {
+  0% { left: -32px; width: 32px; }
+  50% { left: 25%; width: 100%; }
+  100% { left: calc(100% + 32px); width: 32px; }
+}
+
+// From right
+@keyframes fromRight {
+  0% { right: -32px; width: 32px; }
+  50% { right: 25%; width: 100%; }
+  100% { right: calc(100% + 32px); width: 32px; }
+}
+
+
+// Scrollbar
+#scrollbar {
+
+  display: flex;
+  position: fixed;
+  bottom: 64px; left: 96px;
+  width: calc(100vw - 192px);
+  height: 12px;
+  z-index: 8;
+
+  .element {
+
+    flex: 1;
+
+    &.mid-part {
+
+      position: relative;
+
+      .inner {
+
+        position: absolute;
+        top: 50%; left: 8px;
+        transform: translateY(-50%);
+        width: calc(100% - 16px);
+        height: 2px;
+
+        background-color: rgba(#393939, .2);
+        overflow: hidden;
+
+        .overlay {
+
+          position: absolute;
+          top: 0; width: 0; height: 2px;
+          background-color: rgba($tert, .75);
+
+
+        }
+
+      }
+
+      // Animations
+      &.animLeft .overlay {
+
+        left: 0;
+        animation: $trans 1000ms fromLeft;
+
+      }
+
+      &.animRight .overlay {
+
+        right: 0;
+        animation: $trans 1000ms fromRight;
+
+      }
+
+    }
+
+    &.view-part {
+
+      position: relative;
+      max-width: 12px;
+      min-width: 12px;
+
+      .inner {
+
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%,-50%);
+
+        width: 8px; height: 8px;
+        background-color: rgba(#393939, .5);
+        border-radius: 50%;
+        transition: 500ms $trans;
+
+      }
+
+      &.active .inner {
+
+        width: 12px;
+        height: 12px;
+        background-color: $tert;
+
+      }
+
+    }
+
+  }
+
+}
+
+
+// Animations
+// From left
+@keyframes oFromLeft {
+  0% { left: calc(-100% - 32px); width: 100%; }
+  50% { left: 0; width: 125%; }
+  100% { left: calc(100% + 32px); width: 100%; }
+}
+
+// From right
+@keyframes oFromRight {
+  0% { right: calc(-100% - 32px); width: 100%; }
+  50% { right: 0; width: 125%; }
+  100% { right: calc(100% + 32px); width: 100%; }
+}
+
+// Overlay
+#overlay {
+
+  position: fixed;
+  top: 0; left: calc(-100% - 32px);
+  width: 100%;
+  height: 100%;
+  background-color: lighten($seco, 85%);
+  z-index: 7;
+
+  // Animations
+  &.animLeft {
+
+    left: 0; right: auto;
+    animation: $trans 1000ms oFromLeft;
+
+  }
+
+  &.animRight {
+
+    right: 0; left: auto;
+    animation: $trans 1000ms oFromRight;
+
+  }
+  
+
+}

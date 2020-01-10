@@ -38,43 +38,7 @@ body {
 
 }
 
-
-// Cursor
-#cursor {
-
-  position: absolute;
-  pointer-events: none;
-
-  .secondary,
-  .primary {
-
-    position: fixed;
-    transform: translate(-50%,-50%);
-    border-radius: 50%;
-    z-index: 9;
-
-  }
-
-  .secondary {
-
-    width: 64px;
-    height: 64px;
-    
-    // background-color: rgba($tert, .2);
-    border: 1px solid $tert;
-
-    transition: 
-      width 80ms $trans,
-      height 80ms $trans;
-
-  }
-
-  .primary {
-
-    width: 8px;
-    height: 8px;
-    background-color: $tert;
-
-  }
-
-}
+// Imports
+@import './infra/cursor.infra';
+@import './infra/scrollbar.infra';
+@import './infra/view.infra';

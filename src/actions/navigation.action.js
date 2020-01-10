@@ -9,3 +9,6 @@ export let append_view = (( id, options={} ) => {
 
 // Switch view
 export const SWITCH_VIEW = 'SWITCH_VIEW';
+export let switch_view = ( id => {
+  return { type: SWITCH_VIEW, payload: { id } };
+})

@@ -22,7 +22,9 @@ export default class View
   render () { return (
     <div className={'view'+(this.state.active ? ' active':'')}
       id={this.props.id}>
-      {this.props.children}
+      <div className="inner">
+        {this.props.children}
+      </div>
     </div>
   )}
 

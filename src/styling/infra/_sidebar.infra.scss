@@ -1,0 +1,176 @@
+
+
+// Sidebar
+#sidebar {
+
+  // Hamburger icon
+  .icon {
+
+    // Fields
+    $size: 6px;
+    $spread: 6px;
+
+    position: fixed;
+    top: calc(17.5% / 2); right: calc(64px + 32px / 2);
+    transform: translateY(-50%);
+
+    width: 96px; height: 96px;
+    border-radius: 50%;
+
+    z-index: 10;
+
+    // Actual icon
+    .inner {
+
+      // The icon
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+
+      // Subparts
+      & > * {
+        
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        
+        width: $size;
+        height: $size;
+        border-radius: calc(#{$size} / 2);
+        // background-color: rgba($seco, .5);
+        border: 1px solid rgba($seco, .5);
+        transition: 750ms $trans;
+        
+      }
+      
+      // Specific subparts
+      .topleft { left: calc(50% - #{$spread}); top: calc(50% - #{$spread}); transform: translate(-50%,-50%) rotate(45deg); }
+      .topright { left: calc(50% + #{$spread}); top: calc(50% - #{$spread}); transform: translate(-50%,-50%) rotate(45deg); }
+      .bottomright { left: calc(50% + #{$spread}); top: calc(50% + #{$spread}); transform: translate(-50%,-50%) rotate(-45deg); }
+      .bottomleft { left: calc(50% - #{$spread}); top: calc(50% + #{$spread}); transform: translate(-50%,-50%) rotate(-45deg); }
+  
+      @keyframes animTo {
+        50% { top: 50%; left: 50%; bottom: auto; right: auto; height: $size; width: 4px; }
+        100% { top: 50%; left: 50%; bottom: auto; right: auto; height: 24px; width: 4px; }
+      }
+
+      @keyframes animFrom {
+        0% { top: 50%; left: 50%; bottom: auto; right: auto; height: 24px; width: 4px; }
+        50% { top: 50%; left: 50%; bottom: auto; right: auto; height: $size; width: 4px; }
+      }
+
+      &.animTo * { animation: animTo 750ms $trans; }
+      &.animFrom * { animation: animFrom 750ms $trans; }
+
+      &.active > * {
+        
+        top: 50%; left: 50%; 
+        bottom: auto; right: auto;
+        height: 24px; width: 4px;
+        border-width: 1px;
+      
+      }
+
+    }
+
+    // Hover and active
+    &:hover .inner > * {
+      
+      border-color: $seco;
+      
+    }
+
+  }
+
+  // Overlay
+  .overlay {
+
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-color: rgba($seco, .3);
+    
+    pointer-events: none;
+    z-index: 9;
+
+    opacity: 0;
+    transition: 750ms $trans;
+
+    &.active {
+      opacity: 1;
+    }
+
+  }
+
+  // Actual sidebar
+  .content {
+
+    position: fixed;
+    top: 0; left: 100%;
+    width: calc(100vw - 48px); height: 100vh;
+
+    background-color: $prim;
+    transition: 750ms $trans;
+    z-index: 9;
+
+    &.active { left: 48px; }
+    .logo { display: none; }
+
+    .navigation-elements {
+
+      position: absolute;
+      bottom: 100px; left: 160px;
+
+      .element {
+
+        position: relative;
+        transition: 300ms $trans;
+        color: rgba($seco, .6);
+
+        font-size: 64px;
+        font-weight: 900;
+        text-transform: uppercase;
+
+        width: fit-content;
+  
+        &:after,
+        &:before {
+
+          content: '';
+          position: absolute;
+          left: -16px;
+          width: 0; height: 2px;
+          background-color: $tert;
+          transition: 250ms $trans;
+
+        }
+
+        &:after { bottom: 16px; }
+        &:before { top: 10px; }
+
+        &:hover { 
+          
+          color: $seco;
+        
+        }
+
+        &:active:after,
+        &:active:before {
+
+          width: calc(100% + 32px);
+
+        }
+
+
+
+        &.active:after,
+        &.active:before { width: calc(100% + 32px); }
+        &.active { color: $seco; }
+
+      }
+
+    }
+
+  }
+
+}

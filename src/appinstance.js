@@ -9,6 +9,7 @@ import './styling/base.scss';
 // Components
 import Cursor from './components/infra/cursor.infra';
 import ScrollBar from './components/infra/scrollbar.infra'; 
+import SideBar from './components/infra/sidebar.infra';
 
 // Views
 import AboutView from './components/views/about.view';
@@ -33,6 +34,7 @@ export default hot (module) (class AppInstance
   render () { return (
     <div id="instance"> 
 
+      {/* Views */}
       <div id="views">
         <AboutView store={this.props.store} />
         <TowwwnView store={this.props.store} />
@@ -40,10 +42,20 @@ export default hot (module) (class AppInstance
         <ContactView store={this.props.store} />
       </div>
       
-      <Cursor />
-      <ScrollBar store={this.props.store} />
+      {/* General */}
+      <div id="logo" className="attraction">
+        <div className="inner">kjøller.me</div>
+      </div>
       
+      <SideBar store={this.props.store} />
+      <ScrollBar store={this.props.store} />
+      <Cursor />
+      
+      {/* Animation overlay */}
       <div id="overlay">
+        <div className="logo">
+          kjøller.me
+        </div>
       </div>
 
     </div>

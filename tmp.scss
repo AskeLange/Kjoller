@@ -1,0 +1,37 @@
+
+$size: 6px;
+$spread: 6px;
+$trans: cubic-bezier(.9,0,.1,1);
+
+#hamburger {
+
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  
+  & > * {
+    
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    
+    width: $size;
+    height: $size;
+    border-radius: calc(#{$size} / 2);
+    background-color: #191919;
+    
+    animation: anim 1000ms $trans infinite;
+    
+  }
+  
+  .topleft { left: calc(50% - #{$spread}); top: calc(50% - #{$spread}); transform: translate(-50%,-50%) rotate(45deg); }
+  .topright { left: calc(50% + #{$spread}); top: calc(50% - #{$spread}); transform: translate(-50%,-50%) rotate(45deg); }
+  .bottomright { left: calc(50% + #{$spread}); top: calc(50% + #{$spread}); transform: translate(-50%,-50%) rotate(-45deg); }
+  .bottomleft { left: calc(50% - #{$spread}); top: calc(50% + #{$spread}); transform: translate(-50%,-50%) rotate(-45deg); }
+  
+  @keyframes anim {
+    25% { top: 50%; left: 50%; bottom: auto; right: auto; height: $size; width: $size; }
+    50% { top: 50%; left: 50%; bottom: auto; right: auto; height: 24px; width: calc(#{$size} / 2) }
+  }
+  
+}

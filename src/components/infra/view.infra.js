@@ -22,9 +22,7 @@ export default class View
   render () { return (
     <div className={'view'+(this.state.active ? ' active':'')}
       id={this.props.id}>
-      <div className="inner">
-        {this.props.children}
-      </div>
+      {this.props.children}
     </div>
   )}
 
@@ -33,7 +31,24 @@ export default class View
   // On store change
   onStoreChange () {
 
+    // Extracts data
+    let state = this.props.store.getState ();
+    let active_view = state.navigation.active_view;
+    let views = state.navigation.views;
+
+    // Finds current view
+    let a, n;
+    for (n = 0; n < views.length; n ++) {
+      if (views[n].id == this.props.id) {
+        a = active_view == views[n].index;
+        break;
+      }
+    }
     
+    // Sets state
+    this.setState ({ 
+      active: a
+    });
 
   }
 
@@ -47,9 +62,9 @@ export default class View
 
     // Appends view
     let p = this.props;
-    p.store.dispatch ( append_view ({
-      id: this.props.id
-    }));
+    p.store.dispatch ( append_view (
+      this.props.id, { label: this.props.label }
+    ));
 
   }
 

@@ -31,7 +31,7 @@ export default class Scrollbar
   renderPart (e,n) { return (
     <div className={'element'+(e.type=='part'?' mid-part':' view-part')}
       key={`scrollbar-element#${n}`}>
-      <div className="inner">
+      <div className={'inner'+(e.type!='part'?' attraction':'')}>
         <div className="overlay">
         </div>
       </div>
@@ -60,13 +60,29 @@ export default class Scrollbar
 
     // Sets state
     this.setState ({
-      views, active
+    
+      views, 
+      active
+    
+    }, () => {
+      
+      let vie = document.querySelectorAll ('#scrollbar .view-part');
+      vie[active].classList.add ('active');
+
     });
 
   }
 
   // On scroll
   onScroll (e) {
+
+    // Checks if sidebar is active
+    let sidebar = document.getElementById ('sidebar');
+    if (sidebar.classList.contains ('active')) return;
+
+    // Constants
+    const trans = 1250;
+    const scroll_lock = 1250;
     
     // Checks variables
     if (this.canScroll == null)
@@ -81,33 +97,38 @@ export default class Scrollbar
       if (e.deltaY < 0) { b = -- a; }
 
       // Checks boundaries
+      if (a < 0 || a >= this.state.views.length)
+        return;
 
-      // Dispatches action
-      this.props.store.dispatch (
-        switch_view (a)
-      );
-
-      // Animates mid parts
+      // Determines mid part animation direction
       let m = document.querySelectorAll ('#scrollbar .mid-part'), c;
       if (e.deltaY > 0) { c = 'animLeft'; }
       if (e.deltaY < 0) { c = 'animRight'; }
 
+      // Animates overlay
+      let ct = c == 'animLeft' ? 'animRight' : 'animLeft';
       let overlay = document.getElementById ('overlay');
-      overlay.classList.add (c);
-      setTimeout (() => { overlay.classList.remove (c) }, 1000);
+      overlay.classList.add (ct);
+      setTimeout (() => { overlay.classList.remove (ct) }, trans - 20);
 
+      // Animates mid part
       m[b].classList.add (c); 
-      setTimeout (() => { m[b].classList.remove (c); }, 1000);
+      setTimeout (() => { m[b].classList.remove (c); }, trans);
 
-      // Sets active class
+
+      // Sets active classes
       let act = document.querySelectorAll ('#scrollbar .active');
-      let vie = document.querySelectorAll ('#scrollbar .view-part');
       if (act.length > 0) act[0].classList.remove ('active');
-      setTimeout (() => { vie[a].classList.add ('active') }, 1000 / 2);
 
       // Sets can scroll
       this.canScroll = false;
-      setTimeout (() => { this.canScroll = true; }, 1000);
+      setTimeout (() => { this.canScroll = true; }, scroll_lock);
+
+      
+      // Dispatches action
+      setTimeout (() => { this.props.store.dispatch (
+        switch_view (a)
+      )}, trans / 2);
 
     }
 

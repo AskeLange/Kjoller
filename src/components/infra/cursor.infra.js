@@ -13,7 +13,8 @@ export default class Cursor
     this.state = {
       
       prim_cur: { x: 0, y: 0 },
-      seco_cur: { x: 0, y: 0 }
+      seco_cur: { x: 0, y: 0 },
+      target: null,
 
     };
   }
@@ -49,28 +50,63 @@ export default class Cursor
     let delta = ((new Date ()).getTime () - this.last) / 16;
     this.last = (new Date ()).getTime ();
 
-    // Base speed, position difference, 
-    // direction and distance
-    let speed = 128 * delta;
-    let pdiff = { x: p.x - s.x, y: p.y - s.y };
-    let dir = Math.atan2 (pdiff.y, pdiff.x);
-    let dis = Math.sqrt (Math.pow (pdiff.x, 2) + Math.pow (pdiff.y, 2));
-    
-    // Ease-out transition
-    let t  = Math.min (dis / 500, 1);
-    speed *= (t*t * (3.0 - 2.0 * t)) * .94 + .06;
+    let update = (( opp ) => {
 
-    // Calculates new positions and dead zone
-    let npo = { x: s.x + Math.cos (dir) * speed, y: s.y + Math.sin (dir) * speed };
-    if (dis <= 4) { npo.x = p.x; npo.y = p.y; }
+      // Base speed, position difference, 
+      // direction and distance
+      let speed = 128 * delta;
+      let pdiff = { x: opp.x - s.x, y: opp.y - s.y };
+      let dir = Math.atan2 (pdiff.y, pdiff.x);
+      let dis = Math.sqrt (Math.pow (pdiff.x, 2) + Math.pow (pdiff.y, 2));
+      
+      // Ease-out transition
+      let t  = Math.min (dis / 500, 1);
+      speed *= (t*t * (3.0 - 2.0 * t)) * .94 + .06;
 
-    // Sets state
-    this.setState ({
-      seco_cur: {
-        x: npo.x,
-        y: npo.y
-      }
+      // Calculates new positions and dead zone
+      let npo = { x: s.x + Math.cos (dir) * speed, y: s.y + Math.sin (dir) * speed };
+      if (dis <= 4) { npo.x = opp.x; npo.y = opp.y; }
+
+      // Sets state
+      this.setState ({
+        seco_cur: {
+          x: npo.x,
+          y: npo.y
+        }
+      });
+
     });
+
+
+    if (this.state.target == null) {
+    
+      // Updates based on primary cursor
+      update (this.state.prim_cur);
+      document.getElementById ('cursor')
+        .classList.remove ('attracted');
+    
+    } else { 
+      
+      // Aliases
+      let t = this.state.target;
+
+      // Difference, dir and distance
+      let dif = { x: p.x - t.x, y: p.y - t.y };
+      let dir = Math.atan2 (dif.y, dif.x);
+      let dis = Math.sqrt (Math.pow (dif.y, 2) + Math.pow (dif.x, 2));
+
+      // Updates based on target
+      // And primary cursor
+      update ({
+        x: t.x + Math.cos (dir) * dis * .2,
+        y: t.y + Math.sin (dir) * dis * .2,
+      });
+
+      document.getElementById ('cursor')
+        .classList.add ('attracted');
+
+    }
+
 
     // Loops around
     window.requestAnimationFrame (
@@ -88,6 +124,32 @@ export default class Cursor
         y: event.clientY
       }});
     });
+
+    // On mouse hover (attraction)
+    window.requestAnimationFrame (() => {
+      let n, e = document.getElementsByClassName ('attraction');
+      for (n = 0; n < e.length; n ++) {
+        
+        // Mouse over
+        e[n].addEventListener ('mouseover', e => {
+          
+          // Fetches boundaries n' sets state
+          let r = e.target.getBoundingClientRect ();
+          this.setState ({ target: {
+            y: r.top + r.height / 2,
+            x: r.left + r.width / 2
+          }})
+    
+        });
+
+        // Mouse leave
+        e[n].addEventListener ('mouseleave', e => {
+          this.setState ({ target: null });
+        });
+
+      }
+    });
+    
     
     // Initiates loop
     window.requestAnimationFrame (

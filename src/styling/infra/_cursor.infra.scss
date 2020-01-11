@@ -12,7 +12,7 @@
     position: fixed;
     transform: translate(-50%,-50%);
     border-radius: 50%;
-    z-index: 9;
+    z-index: 11;
 
   }
 
@@ -20,13 +20,12 @@
 
     width: 64px;
     height: 64px;
-    
-    background-color: rgba($tert, .2);
-    // border: 1px solid $tert;
+    border: 1px solid rgba($tert, .4);
 
     transition: 
-      width 80ms $trans,
-      height 80ms $trans;
+      width 170ms $trans,
+      height 170ms $trans,
+      background-color 170ms $trans;
 
   }
 
@@ -35,6 +34,14 @@
     width: 8px;
     height: 8px;
     background-color: $tert;
+
+  }
+
+  &.attracted .secondary {
+
+    width: 32px;
+    height: 32px;
+    background-color: rgba($tert, .4);
 
   }
 

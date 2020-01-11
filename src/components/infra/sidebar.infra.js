@@ -2,6 +2,7 @@
 
 // Imports
 import React from 'react';
+import { switch_view } from '../../actions/navigation.action';
 
 // View Component
 export default class View
@@ -42,24 +43,41 @@ export default class View
 
       {/* Actual sidebar */}
       <div className={'content'+(this.state.active?' active':'')}>
-        <div className="logo">
-          Aske Kjøller
-        </div>
-        
         <div className="navigation-elements">
           { this.state.views.map (this.renderElement.bind (this)) }
         </div>
-      </div>
 
+        <div className="footer">
+          <div className="section">
+            <div className="title">
+              Aske Kjøller Lange
+            </div>
 
+            <div className="text">
+              Frontend-developer<br />
+              aske@kjoller.me
+            </div>
+          </div>
+
+          <div className="section">
+            <div className="text">
+              <a href="#" className="attraction">Github</a>
+              <a href="#" className="attraction">Codepen</a>
+              <a href="#" className="attraction">Linkedin</a>
+            </div>
+          </div>
+        </div>
+      </div>  
     </div>
   )}
 
   // Render Navigation Element
   renderElement (e) { return (
     <div className={'element'+(this.state.active_view==e.index?' active':'')} 
-      key={`navigation-element#${e.id}`}>
-      { e.label }
+      key={`navigation-element#${e.id}`} onClick={this.switchView.bind (this, e.index)}>
+      <div className="inner">
+        { e.label }
+      </div>
     </div>
   )}
 
@@ -75,11 +93,11 @@ export default class View
 
     // Active n' inner
     let a = this.state.active;
-    let i = document.querySelectorAll ('#sidebar .inner');
+    let i = document.querySelectorAll ('#sidebar .icon .inner');
 
     // Animation
     if (!a) { i[0].classList.add ('animTo'); }
-    if (a) { i[0].classList.add ('animFrom'); }
+    if (a) { i[0].classList.add ('animFrom');  }
 
     // Removes class and changes active
     this.setState ({ active: !a });
@@ -96,6 +114,23 @@ export default class View
     setTimeout (() => {
       this.canToggle = true;
     }, 750);
+
+  }
+
+  // Switch view
+  switchView (index) {
+
+    if (index == this.state.active_view) return;
+    let c = document.querySelectorAll ('#sidebar .content');
+    c[0].classList.add ('close');
+
+    this.props.store.dispatch 
+      (switch_view (index));
+
+    setTimeout (() => {
+      c[0].classList.remove ('close');
+      this.toggle ();
+    }, 980);
 
   }
 

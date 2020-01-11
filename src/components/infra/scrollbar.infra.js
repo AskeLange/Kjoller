@@ -66,7 +66,8 @@ export default class Scrollbar
     
     }, () => {
       
-      let vie = document.querySelectorAll ('#scrollbar .view-part');
+      let vie = document.querySelectorAll ('#scrollbar .view-part'), n;
+      for (n = 0; n < vie.length; n ++) { vie[n].classList.remove ('active'); }
       vie[active].classList.add ('active');
 
     });

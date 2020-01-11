@@ -44,7 +44,7 @@ export default hot (module) (class AppInstance
       
       {/* General */}
       <div id="logo" className="attraction">
-        <div className="inner">kjøller.me</div>
+        <div className="inner">kjoller.me</div>
       </div>
       
       <SideBar store={this.props.store} />
@@ -54,7 +54,7 @@ export default hot (module) (class AppInstance
       {/* Animation overlay */}
       <div id="overlay">
         <div className="logo">
-          kjøller.me
+          kjoller.me
         </div>
       </div>
 

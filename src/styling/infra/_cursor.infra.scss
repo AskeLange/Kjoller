@@ -20,7 +20,8 @@
 
     width: 64px;
     height: 64px;
-    border: 1px solid rgba($tert, .4);
+    // border: 1px solid rgba($tert, .4);
+    background-color: rgba($tert, .2);
 
     transition: 
       width 170ms $trans,

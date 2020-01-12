@@ -2,7 +2,7 @@
 
 // Imports
 import React from 'react';
-import { switch_view } from '../../actions/navigation.action';
+import { switch_view, toggle_view } from '../../actions/navigation.action';
 
 // View Component
 export default class View
@@ -124,8 +124,19 @@ export default class View
     let c = document.querySelectorAll ('#sidebar .content');
     c[0].classList.add ('close');
 
-    this.props.store.dispatch 
-      (switch_view (index));
+    let elems = document.querySelectorAll ('#sidebar .navigation-elements .element');
+    for (let n = 0; n < elems.length; n++) elems[n].classList.remove ('active');
+    elems [index].classList.add ('active');
+
+    setTimeout (() => {
+      
+      this.props.store.dispatch
+        (toggle_view (false));
+
+      this.props.store.dispatch 
+        (switch_view (index));
+
+    }, 400);
 
     setTimeout (() => {
       c[0].classList.remove ('close');

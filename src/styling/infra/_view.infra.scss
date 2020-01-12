@@ -20,14 +20,22 @@
     position: absolute;
     top: 50%; left: 0;
     transform: translateY(-50%);
-    width: 100%; height: 65%;
+    width: 100vw; height: 65vh;
+    overflow-y: scroll;
+    
+    scroll-behavior: smooth;
+    transition: 750ms $trans;
+    
+    &::-webkit-scrollbar {
+      width: 0;
+    }
 
     .image {
 
-      position: absolute;
+      position: sticky;
       top: 0; left: 0;
-      width: calc(100% - (100% / 1.5));
-      height: 100%;
+      width: calc(100vw - (100vw / 1.5));
+      height: 65vh;
 
       background-size: cover;
       background-position: center;
@@ -47,10 +55,11 @@
 
     }
 
-    .text {
+    .upper-text {
 
       position: absolute;
-      top: 50%; left: calc((100% / 1.5) / 2 + (100% - 100% / 1.5) - 64px);
+      top: calc(65vh / 2); 
+      left: calc((100vw / 1.5) / 2 + (100vw - 100vw / 1.5) - 64px);
       transform: translate(-50%, -50%);
 
       .title {
@@ -70,19 +79,136 @@
         float: right;
         font-weight: 300;
         font-size: 20px;
-        width: calc(690px / 2);
+        max-width: calc(690px / 2);
+        width: fit-content;
         line-height: 1.8;
-        text-indent: 96px;
+        text-indent: 64px;
+        padding-right: 64px;
+        color: rgba($seco, .6);
+        transition: 170ms $trans;
 
         &:before {
 
           content: '';
           position: absolute;
           top: 16px; left: 0;
-          width: 64px; height: 4px;
-          background-color: $tert;
+          width: 48px; height: 4px;
+          background-color: rgba($tert, .6);
+          transition: 750ms $trans,
+            background-color 170ms $trans;
 
         }
+
+        &:hover:not(.inactive) {
+
+          color: $seco;
+          &:before { background-color: $tert; }
+
+        }
+
+        &.inactive:before {
+          width: calc(100%);
+        }
+
+      }
+
+      .nav-icons {
+
+        position: absolute;
+        bottom: 0; left: 0;
+
+        .prev,
+        .next {
+
+          position: absolute;
+          width: 48px; height: 48px;
+          transform: translate(-50%,50%);
+          border-radius: 24px;
+
+          svg {
+            
+            width: 24px;
+            fill: rgba($tert, .4);
+
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%,-50%);
+            transition: 170ms $trans;
+
+          }
+
+          &:hover svg {
+            
+            fill: rgba($seco, 1);
+
+          }
+
+        }
+
+        .prev {
+
+          bottom: 12px; left: 12px;
+
+          svg {
+
+            transform: translate(-50%,-50%) rotate(180deg);
+
+          }
+
+        }
+
+        .next {
+
+          bottom: 12px; left: 64px;
+
+        }
+
+      }
+
+    }
+
+    .lower-text {
+
+      transition: 750ms $trans;
+      height: 0;
+      
+      position: absolute;
+      top: calc(65vh / 2 + 320px); 
+      left: calc((100vw / 1.5) / 2 + (100vw - 100vw / 1.5) - 64px);
+      transform: translateX(-50%);
+      width: 690px;
+
+      font-size: 20px;
+      font-weight: 300;
+      text-indent: 48px;
+      line-height: 1.8;
+
+    }
+
+    &.open {
+
+      top: 0;
+      transform: translateY(0);
+
+      width: 100vw;
+      height: 100vh;
+      overflow-y: scroll;
+
+      .image {
+
+        height: 100vh;
+
+      }
+
+      .lower-text {
+
+        height: 100vh;
+
+      }
+
+      .height { 
+
+        height: 200px; 
 
       }
 

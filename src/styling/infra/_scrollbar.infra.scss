@@ -27,6 +27,9 @@ $n_trans: 1250ms;
   height: 12px;
   z-index: 8;
 
+  transition: 750ms $trans;
+  &.inactive { bottom: -64px; }
+
   .element {
 
     flex: 1;

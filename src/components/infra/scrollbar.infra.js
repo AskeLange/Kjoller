@@ -13,6 +13,7 @@ export default class Scrollbar
     super (props);
     this.state = {
       active: 0,
+      open_view: false,
       views: [ ],
     };
   }
@@ -21,7 +22,7 @@ export default class Scrollbar
   // Renders
   // Main render
   render () { return (
-    <div id="scrollbar">
+    <div id="scrollbar" className={this.state.open_view?'inactive':''}>
       { this.fillParts (this.state.views)
         .map (this.renderPart.bind (this)) }
     </div>
@@ -57,12 +58,14 @@ export default class Scrollbar
     let state = this.props.store.getState ();
     let views = state.navigation.views;
     let active = state.navigation.active_view;
+    let open_view = state.navigation.open_view;
 
     // Sets state
     this.setState ({
     
       views, 
-      active
+      active,
+      open_view,
     
     }, () => {
       
@@ -80,6 +83,8 @@ export default class Scrollbar
     // Checks if sidebar is active
     let sidebar = document.getElementById ('sidebar');
     if (sidebar.classList.contains ('active')) return;
+    if (this.state.open_view) return;
+    console.log (this.state.open_view);
 
     // Constants
     const trans = 1250;

@@ -3,13 +3,15 @@
 // Imports
 import {
   APPEND_VIEW,
-  SWITCH_VIEW
+  SWITCH_VIEW,
+  TOGGLE_VIEW
 } from '../actions/navigation.action';
 
 // Initial state
 const init_state = {
   
   active_view: 0,
+  open_view: false,
   views: [ ],
 
 };
@@ -49,6 +51,14 @@ export default (( state=init_state, action ) => {
         active_view: i
       });
 
+    }
+
+    // Toggle view
+    case TOGGLE_VIEW: {      
+      let v = action.payload.forced_value;
+      return Object.assign ({}, state, {
+        open_view: v != null ? v : !state.open_view,
+      });
     }
 
 

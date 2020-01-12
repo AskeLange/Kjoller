@@ -109,21 +109,21 @@
     // Close animation
     @keyframes close {
 
-      0% { left: 0; width: 100vw; }
-      30% { left: 0; width: 100vw; }
+      0% { left: 48px; width: 100vw; }
+      30% { left: 48px; width: 100vw; }
       100% { left: calc(-100% - 128px); width: calc(100% + 128px); }
 
     }
 
     position: fixed;
     top: 0; left: 100%;
-    width: calc(100vw); height: 100vh;
+    width: 100vw; height: 100vh;
 
     background-color: $prim;
     transition: 750ms $trans;
     z-index: 9;
 
-    &.active { left: 0; }
+    &.active { left: 48px; }
     .logo { display: none; }
 
     &.close {

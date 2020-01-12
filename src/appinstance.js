@@ -14,7 +14,7 @@ import SideBar from './components/infra/sidebar.infra';
 // Views
 import AboutView from './components/views/about.view';
 import TowwwnView from './components/views/towwwn.view';
-import AlternativetView from './components/views/alternativet.view';
+import TypeUniteView from './components/views/type.view';
 import ContactView from './components/views/contact.view';
 
 
@@ -38,7 +38,7 @@ export default hot (module) (class AppInstance
       <div id="views">
         <AboutView store={this.props.store} />
         <TowwwnView store={this.props.store} />
-        <AlternativetView store={this.props.store} />
+        <TypeUniteView store={this.props.store} />
         <ContactView store={this.props.store} />
       </div>
       

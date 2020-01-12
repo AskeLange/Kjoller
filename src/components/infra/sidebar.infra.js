@@ -55,7 +55,7 @@ export default class View
 
             <div className="text">
               Frontend-developer<br />
-              aske@kjoller.me
+              <a href="#" className="attraction">aske@kjoller.me</a>
             </div>
           </div>
 

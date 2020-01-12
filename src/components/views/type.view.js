@@ -4,16 +4,16 @@
 import React from 'react';
 import View from '../infra/view.infra';
 
-// Alternativet View
-export default class AlternativetView
+// TypeUnite View
+export default class TypeUniteView
   extends React.Component {
 
   // Constructor
   constructor (props) {
     super (props);
     this.state = {
-      id: 'v_alternativet',
-      label: 'Alternativet'
+      id: 'v_type',
+      label: 'Type Unite'
     };
   }
 

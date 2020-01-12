@@ -205,7 +205,7 @@
         .title {
 
           font-weight: 900;
-          font-size: 20px;
+          font-size: 18px;
           margin-bottom: 8px;
 
         }
@@ -213,7 +213,7 @@
         .text {
 
           font-weight: 300;
-          font-size: 16px;
+          font-size: 14px;
           line-height: 1.6;
 
         }
@@ -222,11 +222,14 @@
 
           display: block;
           width: fit-content;
-          font-size: 16px;
+          font-size: 14px;
           text-decoration: none;
+          transition: 170ms $trans;
 
-          color: rgba($seco, .5);
+          color: rgba($seco, .6);
           &:hover { color: $seco; }
+
+          cursor: none;
 
         }
 

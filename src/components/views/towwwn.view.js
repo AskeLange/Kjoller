@@ -28,15 +28,13 @@ export default class TowwwnView
         </div>
 
         <div className="text">
-          <div className="backdrop">No. 2</div>
-          <div className="sub-title">Co-founder & frontend-lead</div>
-          <div className="title">Towwwn</div>
-          <div className="desc">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi blandit sit amet nisl ut viverra. Sed pretium, sapien vitae rhoncus ultrices, ante leo eleifend velit, in consequat urna sem vitae magna. Donec rhoncus, orci id tincidunt egestas, metus elit vestibulum lorem, nec ultricies libero metus vel massa..
+          <div className="title">
+            Towwwn. Dolor sit amet, consectetur adipiscing elit.
           </div>
-        </div>
 
-        <div className="next">
+          <div className="value">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum tempus.
+          </div>
         </div>
 
       </div>

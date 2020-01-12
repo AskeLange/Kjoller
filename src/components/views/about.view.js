@@ -28,15 +28,13 @@ export default class AboutView
         </div>
 
         <div className="text">
-          <div className="backdrop">No. 1</div>
-          <div className="sub-title">About me, Aske Kjøller, a</div>
-          <div className="title">Frontender</div>
-          <div className="desc">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi blandit sit amet nisl ut viverra. Sed pretium, sapien vitae rhoncus ultrices, ante leo eleifend velit, in consequat urna sem vitae magna. Donec rhoncus, orci id tincidunt egestas, metus elit vestibulum lorem, nec ultricies libero metus vel massa. Quisque purus ex, interdum sit amet lorem quis, ornare maximus metus.
+          <div className="title">
+            About me. Dolor sit amet, consectetur adipiscing elit.
           </div>
-        </div>
 
-        <div className="next">
+          <div className="value">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum tempus.
+          </div>
         </div>
 
       </div>

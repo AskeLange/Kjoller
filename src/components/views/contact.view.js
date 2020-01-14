@@ -16,6 +16,7 @@ export default class ContactView
       id: 'v_contact',
       label: 'Contact',
       open: false,
+      title: 'Interested? Write & say hi!',
     };
   }
 
@@ -30,13 +31,17 @@ export default class ContactView
         </div>
 
         <div className="upper-text">
-          <div className="title">
-            Contact me. Dolor sit amet, consectetur adipiscing elit.
+          <div className={'open attraction'+(this.state.open?' inactive':'')}
+            onClick={this.toggleView.bind (this)}>
+            <svg viewBox="0 0 24 24">
+              <use xlinkHref="#icon-right">
+              </use>
+            </svg>
           </div>
 
-          <div className={'value'+(this.state.open?' inactive':' attraction')}
-            onClick={this.toggleView.bind (this)}>
-            Read more
+          <div className="title">
+            { this.state.title.split (' ')
+                .map (this.renderWord.bind (this)) }
           </div>
         </div>
 
@@ -45,6 +50,13 @@ export default class ContactView
 
       </div>
     </View>
+  )}
+
+  // Render words
+  renderWord (e,n) { return (
+    <div className="word" data-id={n}>
+      <div className="inner">{e}</div>
+    </div>
   )}
 
 
@@ -77,10 +89,46 @@ export default class ContactView
     // Extracts data
     let state = this.props.store.getState ();
     let open = state.navigation.open_view;
+    let active_view = state.navigation.active_view;
+    let views = state.navigation.views;
 
     // Sets state
     this.setState ({
       open
+    }, () => {
+
+      // Finds active view
+      let n, index;
+      for (n = 0; n < views.length; n ++) {
+        if (views[n].id == this.state.id) {
+          index = views[n].index; break;
+        }
+      }
+
+      if (index == active_view) {
+
+        // Sets words to active
+        let time = 100;
+        let words = document.querySelectorAll (`#${this.state.id} .word`);
+        for (let n = 0; n < words.length; n ++) {
+          setTimeout (() => {
+            words [n].classList.add ('active');
+          }, words [n].attributes['data-id'].value * time);
+        }
+
+      } else {
+
+        // Sets words to active
+        let time = 100;
+        let words = document.querySelectorAll (`#${this.state.id} .word`);
+        for (let n = 0; n < words.length; n ++) {
+          setTimeout (() => {
+            words [n].classList.remove ('active');
+          }, words [n].attributes['data-id'].value * time);
+        }
+
+      }
+
     });
 
   }

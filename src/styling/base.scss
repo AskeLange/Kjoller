@@ -4,9 +4,9 @@
 @import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700&display=swap');
 
 // Fields
-$font: 'Libre Baskerville', serif;
+$font: 'Poppins'; // 'Libre Baskerville', serif;
 $trans: cubic-bezier(.9,0,.1,1);
-$prim: #EEEEEE;
+$prim: #ffffff;
 $seco: #191919;
 $tert: #E32F38; // #2140AA;
 
@@ -54,7 +54,7 @@ body {
         font-size: 24px;
         font-weight: 300;
         text-transform: lowercase;
-        color: rgba($seco, .5);
+        color: rgba($seco, 1);
         z-index: 6;
 
         line-height: 1.2;

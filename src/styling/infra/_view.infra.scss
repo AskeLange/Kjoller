@@ -40,7 +40,8 @@
       background-size: cover;
       background-position: center;
 
-      transition: 500ms $trans;
+      transition: 750ms $trans;
+      // filter: grayscale(100%);
       
       &:after {
 
@@ -58,17 +59,87 @@
     .upper-text {
 
       position: absolute;
-      top: calc(65vh / 2); 
+      top: calc(65vh / 2 - 16px); 
       left: calc((100vw / 1.5) / 2 + (100vw - 100vw / 1.5) - 64px);
       transform: translate(-50%, -50%);
+
+      .open {
+
+        position: absolute;
+        bottom: -64px;
+        right: -0px;
+        transform: translate(-50%,-50%);
+
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        
+        white-space: nowrap;
+        padding-left: -32px;
+
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: $tert;
+
+        svg {
+
+          position: absolute;
+          top: 50%; left: 50%;
+          transform: translate(-50%,-50%) rotate(-90deg);
+          width: 64px;
+
+          * {
+
+            fill: transparent;
+            stroke: $tert;
+            stroke-width: 1px;
+            transition: 170ms $trans;
+
+          }
+
+        }
+
+        &:hover svg * {
+
+          fill: $tert;
+
+        }
+
+      }
 
       .title {
 
         font-size: 64px;
         font-weight: 900;
         max-width: 690px;
-        width: 690px;
+        width: 530px;
         line-height: 1.2;
+
+        .word {
+          
+          height: 72px;
+          margin-right: 16px;
+          padding-top: 72px;
+          transition: 750ms $trans;
+          overflow: hidden;
+          float: left;
+
+          .inner {
+            
+            width: fit-content;
+            transition: 1400ms $trans;
+            
+          }
+          
+          &.active {
+            
+            padding-top: 0;
+            // .inner { opacity: 1; }
+              
+          }
+          
+        }
 
       }
 
@@ -173,15 +244,33 @@
       height: 0;
       
       position: absolute;
-      top: calc(65vh / 2 + 320px); 
+      top: calc(65vh / 2 + 140px); 
       left: calc((100vw / 1.5) / 2 + (100vw - 100vw / 1.5) - 64px);
       transform: translateX(-50%);
-      width: 690px;
+      width: 530px;
 
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 300;
-      text-indent: 48px;
       line-height: 1.8;
+
+      .section {
+
+        position: relative;
+        margin-bottom: 64px;
+        padding-left: 96px;
+
+        .no {
+
+          position: absolute;
+          top: -12px; left: 32px;
+          color: rgba($tert, .5);
+
+          font-weight: 700;
+          font-size: 16px;
+
+        }
+
+      }
 
     }
 

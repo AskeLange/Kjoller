@@ -37,6 +37,12 @@ body {
 
     }
 
+    &:active #cursor .openable svg {
+
+      width: 96px;
+
+    }
+
     #logo {
 
       position: fixed;
@@ -44,6 +50,7 @@ body {
       transform: translateY(-50%);
       width: 160px; height: 160px;
       border-radius: 50%;
+      white-space: nowrap;
 
       .inner {
         

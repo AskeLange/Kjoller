@@ -22,11 +22,16 @@
     height: 64px;
     // border: 1px solid rgba($tert, .4);
     background-color: rgba($tert, .2);
+    z-index: 11;
+    pointer-events: none;
 
     transition: 
       width 170ms $trans,
       height 170ms $trans,
+      opacity 170ms $trans,
       background-color 170ms $trans;
+
+
 
   }
 
@@ -35,6 +40,34 @@
     width: 8px;
     height: 8px;
     background-color: $tert;
+    z-index: 12;
+
+    &.openable {
+
+      background-color: transparent;
+      
+      svg {
+
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%,-50%) rotate(-90deg);
+
+        width: 128px;
+        stroke: $tert;
+        stroke-width: 3px;
+        transition: 120ms $trans;
+
+      }
+
+      & ~ .secondary {
+        
+        width: 0;
+        height: 0;
+        opacity: 0;
+
+      }
+
+    }
 
   }
 

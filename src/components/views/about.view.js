@@ -30,13 +30,17 @@ export default class AboutView
         <div className="image" style={{ 'backgroundImage': 'url(https://i.pinimg.com/564x/14/d4/fd/14d4fd0db41c4d511bc5699e218c9930.jpg)' }}>
         </div>
 
-        <div className="upper-text">
-          <div className={'open attraction'+(this.state.open?' inactive':'')}
-            onClick={this.toggleView.bind (this)}>
-            <svg viewBox="0 0 24 24">
-              <use xlinkHref="#icon-right">
-              </use>
-            </svg>
+        <div className={`upper-text ${!this.state.open ? 'openable' : ''}`} 
+          onClick={_ => { if (!this.state.open) this.toggleView () }}>
+          
+          <div className="go-back attraction" onClick={this.toggleView.bind (this)}>
+            <div className="inner">
+              <svg viewBox="0 0 24 24">
+                <use xlinkHref="#icon-chevron-right"></use>
+              </svg>
+
+              <span>Go back</span>
+            </div>
           </div>
 
           <div className="title">

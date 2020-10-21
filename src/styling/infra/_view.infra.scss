@@ -63,46 +63,37 @@
       left: calc((100vw / 1.5) / 2 + (100vw - 100vw / 1.5) - 64px);
       transform: translate(-50%, -50%);
 
-      .open {
-
-        position: absolute;
-        bottom: -64px;
-        right: -0px;
-        transform: translate(-50%,-50%);
-
-        width: 96px;
-        height: 96px;
-        border-radius: 50%;
+      .go-back {
         
-        white-space: nowrap;
-        padding-left: -32px;
+        position: absolute;
+        top: -32px; left: 0;
+        width: 100%; height: 24px;
+        overflow: hidden;
 
-        font-size: 16px;
-        font-weight: 700;
-        text-transform: uppercase;
-        color: $tert;
-
-        svg {
+        .inner {
 
           position: absolute;
-          top: 50%; left: 50%;
-          transform: translate(-50%,-50%) rotate(-90deg);
-          width: 64px;
+          bottom: -100%; left: 0;
+          transition: 600ms $trans;
 
-          * {
+          svg {
 
-            fill: transparent;
-            stroke: $tert;
-            stroke-width: 1px;
-            transition: 170ms $trans;
+            position: absolute;
+            top: 50%; left: 0;
+            transform: translateY(-50%) rotate(180deg);
+
+            height: 18px;
+            fill: $seco;
 
           }
 
-        }
+          span { 
+            
+            text-transform: uppercase; 
+            font-weight: 300; 
+            margin-left: 32px;
 
-        &:hover svg * {
-
-          fill: $tert;
+          }
 
         }
 
@@ -286,6 +277,16 @@
       .image {
 
         height: 100vh;
+
+      }
+
+      .upper-text {
+        
+        .go-back .inner {
+
+          bottom: 0;
+
+        }
 
       }
 

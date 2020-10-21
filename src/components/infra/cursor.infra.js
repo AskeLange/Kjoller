@@ -15,6 +15,7 @@ export default class Cursor
       prim_cur: { x: 0, y: 0 },
       seco_cur: { x: 0, y: 0 },
       target: null,
+      open_icon: false,
 
     };
   }
@@ -24,15 +25,29 @@ export default class Cursor
   // Main render
   render () { return (
     <div id="cursor">
+      
+      { !this.state.open_icon &&
+        <div className="primary" style={{
+          top: Math.round (this.state.prim_cur.y)+'px',
+          left: Math.round (this.state.prim_cur.x)+'px' }}>
+        </div>
+      }
+
+      { this.state.open_icon &&
+        <div className="primary openable" style={{
+          top: Math.round (this.state.prim_cur.y)+'px',
+          left: Math.round (this.state.prim_cur.x)+'px' }}>
+            <svg viewBox="0 0 24 24">
+              <use xlinkHref="#icon-right"></use>
+            </svg>
+        </div>
+      }
+
       <div className="secondary" style={{
         top: Math.round (this.state.seco_cur.y)+'px',
         left: Math.round (this.state.seco_cur.x)+'px' }}>
       </div>
-      
-      <div className="primary" style={{
-        top: Math.round (this.state.prim_cur.y)+'px',
-        left: Math.round (this.state.prim_cur.x)+'px' }}>
-      </div>
+
     </div>
   )}
 
@@ -60,7 +75,7 @@ export default class Cursor
       let dis = Math.sqrt (Math.pow (pdiff.x, 2) + Math.pow (pdiff.y, 2));
       
       // Ease-out transition
-      let t  = Math.min (dis / 500, 1);
+      let t = Math.min (dis / 500, 1);
       speed *= (t*t * (3.0 - 2.0 * t)) * .94 + .06;
 
       // Calculates new positions and dead zone
@@ -125,8 +140,10 @@ export default class Cursor
       }});
     });
 
-    // On mouse hover (attraction)
+    // Mouse hover states
     window.requestAnimationFrame (() => {
+      
+      // On mouse hover (attraction)
       let n, e = document.getElementsByClassName ('attraction');
       for (n = 0; n < e.length; n ++) {
         
@@ -148,6 +165,27 @@ export default class Cursor
         });
 
       }
+
+      // On mouse hover (openable)
+      e = document.getElementsByClassName ('openable');
+      for (n = 0; n < e.length; n ++) {
+
+        // Mouse over
+        e [n].addEventListener ('mouseover', ev => {
+          for (let i = 0; i < ev.path.length; i ++) {
+            if (ev.path [i].classList.contains ('openable')) {
+              this.setState ({ open_icon: true }); break;
+            }
+          }
+        });
+
+        // Mouse leave
+        e[n].addEventListener ('mouseleave', ev => {
+          this.setState ({ open_icon: false });
+        });
+
+      }
+
     });
     
     
